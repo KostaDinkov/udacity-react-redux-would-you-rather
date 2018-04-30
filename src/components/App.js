@@ -24,7 +24,7 @@ class App extends Component {
           ? null
           : !this.props.authedUser
             ? <SignIn/>
-            : <QuestionList listTitle="Unanswered Questions"/>
+            : <QuestionList listTitle="Unanswered Questions" filter='answered'/>
         }
       </Fragment>
     );
