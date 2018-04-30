@@ -2,7 +2,7 @@
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
-#cssmenu ul li a {
+#cssmenu ul li a{
   margin: 0;
   padding: 0;
   border: 0;
@@ -69,7 +69,7 @@
 #cssmenu > ul > li > a:hover {
   color: #ffffff;
 }
-#cssmenu > ul > li > a:after {
+#cssmenu > ul > li > a:after{
   position: absolute;
   left: 0;
   bottom: 0;
@@ -95,3 +95,23 @@
 #cssmenu > ul > li > a:hover:after {
   background: #47c9af;
 }
+/* custom */
+
+#authedUser{
+  z-index: 2;
+  padding: 18px 25px 12px 25px;
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #444444;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  margin-right: -4px;
+  display:block;
+  float:right;
+
+}
+
