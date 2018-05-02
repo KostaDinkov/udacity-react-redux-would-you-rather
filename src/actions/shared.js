@@ -1,5 +1,5 @@
 import {getInitialData} from '../data/api';
-import {receiveUsers} from './users';
+import {receiveUsers, setAuthedUser} from './users';
 import { receiveQuestions} from './questions';
 import {showLoading, hideLoading} from 'react-redux-loading-bar'
 
@@ -10,6 +10,10 @@ export function handleInitialData(){
       .then(({users,questions})=>{
         dispatch(receiveUsers(users));
         dispatch(receiveQuestions(questions));
+
+        //TODO remove this before going live
+        dispatch(setAuthedUser(users['tylermcginnis']));
+
         dispatch(hideLoading());
       })
   }

@@ -3,9 +3,9 @@ import {handleInitialData} from '../actions/shared';
 import {connect} from 'react-redux';
 import Nav from './Nav';
 import SignIn from './SignIn';
-import QuestionList from './QuestionList';
+import {Route, Switch, withRouter} from 'react-router';
 import LoadingBar from 'react-redux-loading-bar';
-import QuestionsDashboard from './QuestionsDashboard'
+import QuestionsDashboard from './QuestionsDashboard';
 
 class App extends Component {
 
@@ -18,12 +18,19 @@ class App extends Component {
       <Fragment>
         <Nav/>
         <LoadingBar/>
-        {this.props.loading
-          ? null
-          : !this.props.authedUser
-            ? <SignIn/>
-            : <QuestionsDashboard/>
-        }
+        <Switch>
+          <Route exact path='/' render={() => {
+            return (
+              this.props.loading
+                ? null
+                : <QuestionsDashboard/>
+            );
+          }}/>
+          <Route exact path='/newQuestion' render={() => <div>New Question component here</div>}/>
+          <Route exact path='/leaderBoard' render={() => <div>Leader Board component here</div>}/>
+        </Switch>
+
+
       </Fragment>
     );
   }
@@ -34,4 +41,4 @@ function mapStateToProps({ authedUser, questions }) {
 
 }
 
-export default connect(mapStateToProps)(App);
+export default withRouter (connect(mapStateToProps)(App));

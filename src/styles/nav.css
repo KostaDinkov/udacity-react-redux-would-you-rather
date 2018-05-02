@@ -92,7 +92,9 @@
 }
 #cssmenu > ul > li.active > a:after,
 #cssmenu > ul > li:hover > a:after,
-#cssmenu > ul > li > a:hover:after {
+#cssmenu > ul > li > a:hover:after,
+#cssmenu > ul > li > a.active:after
+{
   background: #47c9af;
 }
 /* custom */

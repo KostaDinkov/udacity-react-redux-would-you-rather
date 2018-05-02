@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 class Nav extends React.Component {
   render() {
@@ -11,9 +12,9 @@ class Nav extends React.Component {
     return (
       <div id='cssmenu'>
         <ul>
-          <li className='active'><a href='#'>Home</a></li>
-          <li><a href='#'>New Question</a></li>
-          <li><a href='#'>Leader Board</a></li>
+           <li><NavLink exact to='/' activeClassName='active'>Home</NavLink></li>
+           <li><NavLink exact to='/newQuestion' activeClassName ='active'>New Question</NavLink></li>
+           <li><NavLink exact to='/leaderBoard' activeClassName = 'active'>Leader Board</NavLink></li>
           {/* Todo add logout link*/}
           {authedUser && (<span id='authedUser'>Hello, {authedUser.name}</span>)}
           {authedUser && (<li><a href='#'>Logout</a></li>)}
