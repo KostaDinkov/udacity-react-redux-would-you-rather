@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
+const TEXT_PREVIEW_LEN = 20;
 
 class QuestionListItem extends React.Component {
   render() {
     const avatar = this.props.author.avatarURL;
     const question = this.props.question;
-    const optionOne = question.optionOne.text.slice(0, 10) + '...';
-    const optionTwo = question.optionTwo.text.slice(0, 10) + '...';
+    const optionOne = question.optionOne.text.slice(0, TEXT_PREVIEW_LEN) + '...';
+    const optionTwo = question.optionTwo.text.slice(0, TEXT_PREVIEW_LEN) + '...';
     const author = this.props.author;
 
     return (
