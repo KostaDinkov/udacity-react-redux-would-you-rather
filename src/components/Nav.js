@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { withRouter} from 'react-router';
 
 class Nav extends React.Component {
   render() {
@@ -13,8 +14,8 @@ class Nav extends React.Component {
       <div id='cssmenu'>
         <ul>
            <li><NavLink exact to='/' activeClassName='active'>Home</NavLink></li>
-           <li><NavLink exact to='/newQuestion' activeClassName ='active'>New Question</NavLink></li>
-           <li><NavLink exact to='/leaderBoard' activeClassName = 'active'>Leader Board</NavLink></li>
+           <li><NavLink  to='/newQuestion' activeClassName ='active'>New Question</NavLink></li>
+           <li><NavLink  to='/leaderBoard' activeClassName = 'active'>Leader Board</NavLink></li>
           {/* Todo add logout link*/}
           {authedUser && (<span id='authedUser'>Hello, {authedUser.name}</span>)}
           {authedUser && (<li><a href='#'>Logout</a></li>)}
@@ -30,4 +31,4 @@ function mapStateToProps({ authedUser }) {
   };
 }
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));

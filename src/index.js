@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import reducer from './reducers';
 import thunk from 'redux-thunk';
 import './styles/nav.css';
+import 'react-toastify/dist/ReactToastify.css'
 import {BrowserRouter} from 'react-router-dom';
 
 
