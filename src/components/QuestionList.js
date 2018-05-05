@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import QuestionListItem from './QuestionListItem';
+import * as auth from '../util/auth'
 
 export const listFilters = {ANSWERED:'answered', UNANSWERED:'unanswered'};
 
@@ -23,38 +24,34 @@ class QuestionList extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps({questions}, ownProps) {
   //TODO think of better filtering system
-  if (!state.authedUser) {
+  if (!auth.isAuthed()) {
     return { questions: []};
   }
   else {
-    const authedUserId = state.authedUser.id;
-
-    let questions = {};
-    console.log(state.questions);
+    const authedUserId = auth.getUserId();
 
     //pass only the unanswered questions
     if (ownProps.filter === listFilters.UNANSWERED) {
-      questions = Object.keys(state.questions)
+      questions = Object.keys(questions)
                         .filter((k) => (
-                          !state.questions[k].optionOne.votes.includes(authedUserId)
+                          !questions[k].optionOne.votes.includes(authedUserId)
                           &&
-                          !state.questions[k].optionTwo.votes.includes(authedUserId)))
-                        .map(k => state.questions[k]);
+                          !questions[k].optionTwo.votes.includes(authedUserId)))
+                        .map(k => questions[k]);
     }
     //pass only the answered questions
     else if (ownProps.filter === listFilters.ANSWERED) {
-      questions = Object.keys(state.questions)
+      questions = Object.keys(questions)
                         .filter((k) => (
-                          state.questions[k].optionOne.votes.includes(authedUserId)
+                          questions[k].optionOne.votes.includes(authedUserId)
                           ||
-                          state.questions[k].optionTwo.votes.includes(authedUserId)))
-                        .map(k => state.questions[k]);
+                          questions[k].optionTwo.votes.includes(authedUserId)))
+                        .map(k => questions[k]);
     }
     return {
       questions,
-
     };
   }
 

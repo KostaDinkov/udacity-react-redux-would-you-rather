@@ -1,5 +1,5 @@
 import React, {Fragment, Component} from 'react';
-import {connect} from 'react-redux';
+import * as auth from '../util/auth'
 import {withRouter} from 'react-router';
 import {createQuestion, handleCreateQuestion} from '../actions/questions';
 import {toast} from 'react-toastify';
@@ -20,7 +20,7 @@ class NewQuestion extends Component {
         const question = {
             optionOneText: this.state.option1,
             optionTwoText: this.state.option2,
-            author: this.props.authedUser.id,
+            author: auth.getUserId(),
         };
         if (NewQuestion.validateInput(question)) {
             this.props.dispatch(handleCreateQuestion(question))
@@ -63,8 +63,5 @@ class NewQuestion extends Component {
     }
 }
 
-function mapStateToProps({authedUser}) {
-    return {authedUser};
-}
 
-export default withRouter(connect(mapStateToProps)(NewQuestion));
+export default withRouter(NewQuestion);

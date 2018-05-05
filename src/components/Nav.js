@@ -1,11 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import * as auth from '../util/auth'
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { withRouter} from 'react-router';
 
 class Nav extends React.Component {
   render() {
-    const authedUser = this.props.authedUser;
+    const authedUser = this.props.users[auth.getUserId()];
     if (authedUser) {
       console.log('Authed : ', authedUser);
     }
@@ -24,11 +25,9 @@ class Nav extends React.Component {
     );
   }
 }
-
-function mapStateToProps({ authedUser }) {
-  return {
-    authedUser
-  };
+function mapStateToProps({users}){
+    return {users}
 }
+
 
 export default withRouter(connect(mapStateToProps)(Nav));

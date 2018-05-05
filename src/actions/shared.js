@@ -2,6 +2,7 @@ import {getInitialData} from '../data/api';
 import {receiveUsers, setAuthedUser} from './users';
 import { receiveQuestions} from './questions';
 import {showLoading, hideLoading} from 'react-redux-loading-bar'
+import * as auth from '../util/auth'
 
 export function handleInitialData(){
   return(dispatch)=>{
@@ -12,7 +13,8 @@ export function handleInitialData(){
         dispatch(receiveQuestions(questions));
 
         //TODO remove this before going live
-        dispatch(setAuthedUser(users['tylermcginnis']));
+        auth.setUserId('tylermcginnis');
+        console.log('DATA loaded');
 
         dispatch(hideLoading());
       })
