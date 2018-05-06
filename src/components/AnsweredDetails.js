@@ -1,7 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import Progress from 'react-bootstrap/lib/ProgressBar';
-import {withRouter} from 'react-router';
-
 
 class AnsweredDetails extends Component {
     isSelected(n) {
@@ -10,8 +8,9 @@ class AnsweredDetails extends Component {
         }
         return {display: 'none'};
     }
-     getOptionPercent(votesOne, votesTwo){
-        return 100*(votesOne/(votesOne+votesTwo))
+
+    getOptionPercent(votesOne, votesTwo) {
+        return 100 * (votesOne / (votesOne + votesTwo));
     }
 
     render() {
@@ -24,15 +23,36 @@ class AnsweredDetails extends Component {
         return (
             <Fragment>
                 <div>
-                    <img src={author.avatarURL} alt="avatar" width='100' height='100' style={{float: 'left'}}/>
+                    <img src={author.avatarURL}
+                         alt="avatar"
+                         width='100'
+                         height='100'
+                         style={{float: 'left'}}
+                    />
                     <p>Author :{author.name}</p>
                     <h2>Would You Rather:</h2>
-                    <div><span style={this.isSelected(1)}>✓</span><span>{question.optionOne.text}</span></div>
-                    <div><span style={this.isSelected(2)}>✓</span><span>{question.optionTwo.text}</span></div>
-                    <div style={{width:'50%'}}>
+                    <div>
+                        <span style={this.isSelected(1)}>✓</span>
+                        <span>{question.optionOne.text}</span>
+                    </div>
+                    <div>
+                        <span style={this.isSelected(2)}>✓</span>
+                        <span>{question.optionTwo.text}</span>
+                    </div>
+                    <div style={{width: '50%'}}>
                         <Progress>
-                            <Progress label = {`Option One: ${optionOneVotes} votes`} bsStyle='info' now={this.getOptionPercent(optionOneVotes,optionTwoVotes)} key={1}/>
-                            <Progress label = {`Option Two: ${optionTwoVotes} votes`} bsStyle='warning' now={this.getOptionPercent(optionTwoVotes,optionOneVotes)} key={2}/>
+                            <Progress
+                                label={`Option One: ${optionOneVotes} votes`}
+                                bsStyle='info'
+                                now={this.getOptionPercent(optionOneVotes, optionTwoVotes)}
+                                key={1}
+                            />
+                            <Progress
+                                label={`Option Two: ${optionTwoVotes} votes`}
+                                bsStyle='warning'
+                                now={this.getOptionPercent(optionTwoVotes, optionOneVotes)}
+                                key={2}
+                            />
                         </Progress>
                     </div>
 

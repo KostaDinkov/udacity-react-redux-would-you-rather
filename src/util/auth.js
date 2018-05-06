@@ -9,3 +9,7 @@ export function getUserId(){
 export function isAuthed(){
     return getUserId()!==null
 }
+
+export function logout(){
+    localStorage.removeItem('authedUser');
+}

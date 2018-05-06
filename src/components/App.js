@@ -8,6 +8,10 @@ import QuestionsDashboard from './QuestionsDashboard';
 import NewQuestion from './NewQuestion';
 import {ToastContainer} from 'react-toastify';
 import QuestionDetails from './QuestionDetails';
+import NoMatch from './NoMatch'
+import Leaderboard from './Leaderboard';
+import Logout from './Logout';
+import SignIn from './SignIn';
 
 
 class App extends Component {
@@ -22,18 +26,22 @@ class App extends Component {
             <Fragment>
                 <Nav/>
                 <LoadingBar/>
-                <Route exact path='/' render={() => {
-                    return this.props.loading
-                        ? null
-                        : <QuestionsDashboard/>;
-                }
-                }/>
 
 
-                <Route exact path='/newQuestion' component={NewQuestion}/>
-                <Route exact path='/leaderBoard' render={() => <div>Leader Board component here</div>}/>
-                <Route exact path='/questions/:id' component={QuestionDetails}/>
-
+                <Switch>
+                    <Route exact path='/' render={() => {
+                        return this.props.loading
+                            ? null
+                            : <QuestionsDashboard/>;
+                    }
+                    }/>
+                    <Route exact path='/newQuestion' component={NewQuestion}/>
+                    <Route exact path ='/signIn' component={SignIn}/>
+                    <Route exact path='/leaderBoard' component={Leaderboard}/>
+                    <Route exact path='/questions/:id' component={QuestionDetails}/>
+                    <Route exact path='/logout' component={Logout}/>
+                    <Route component={NoMatch}/>
+                </Switch>
                 <ToastContainer autoClose={3000}/>
 
 

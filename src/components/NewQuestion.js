@@ -1,8 +1,9 @@
 import React, {Fragment, Component} from 'react';
 import * as auth from '../util/auth'
 import {withRouter} from 'react-router';
-import {createQuestion, handleCreateQuestion} from '../actions/questions';
+import { handleCreateQuestion} from '../actions/questions';
 import {toast} from 'react-toastify';
+import {connect} from 'react-redux';
 
 
 class NewQuestion extends Component {
@@ -23,7 +24,7 @@ class NewQuestion extends Component {
             author: auth.getUserId(),
         };
         if (NewQuestion.validateInput(question)) {
-            this.props.dispatch(handleCreateQuestion(question))
+            this.props.dispatch(handleCreateQuestion(question,auth.getUserId()))
                 .then(() => {
                     this.props.history.push('/');
                     toast.success('Question saved!', {
@@ -64,4 +65,4 @@ class NewQuestion extends Component {
 }
 
 
-export default withRouter(NewQuestion);
+export default withRouter(connect()(NewQuestion));

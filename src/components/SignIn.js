@@ -19,7 +19,7 @@ class SignIn extends React.Component {
 
   render() {
     const users = this.props.users;
-    console.log(this.state.selectedUser);
+
     return (
       <div>
         <h2>Please Sign in</h2>

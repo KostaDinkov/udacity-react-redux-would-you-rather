@@ -1,4 +1,4 @@
-//export const ANSWER_QUESTION = 'ANSWER_QUESTION';
+import { userAddQuestion} from './users';
 import {saveQuestion} from '../data/api';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
@@ -13,12 +13,13 @@ function createQuestion(question){
     return {type: CREATE_QUESTION, question};
 }
 
-export function handleCreateQuestion(question){
+export function handleCreateQuestion(question, uid){
     return (dispatch) => {
         dispatch(showLoading());
         return saveQuestion(question)
             .then((question) => {
                 dispatch(createQuestion(question));
+                dispatch(userAddQuestion(uid,question.id))
             })
             .catch(() => {
                 console.log('An error occurred, please try again');

@@ -1,8 +1,9 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import UnansweredDetails from './UnansweredDetails';
-import AnsweredQuestion from './AnsweredDetails'
+import AnsweredQuestion from './AnsweredDetails';
 import * as auth from '../util/auth';
+import { Redirect} from 'react-router';
 
 
 class QuestionDetails extends Component {
@@ -20,7 +21,6 @@ class QuestionDetails extends Component {
         }
     };
 
-
     render() {
         if (this.props.loading) {
             //TODO use dummy skeleton
@@ -28,30 +28,30 @@ class QuestionDetails extends Component {
                 <div>Loading...</div>
             );
         }
+        else if (this.props.question === null) {
+            return (
+                <Redirect to='/404'/>
+            )
+        }
         else {
             const question = this.props.question;
             const author = this.props.author;
-
-            const authedUser = this.props.users[this.props.authedUserId];
+            const authedUser = this.props.users[auth.getUserId()];
             return (
                 this.isQuestionAnswered()
                     ? <AnsweredQuestion question={question} authedUser={authedUser} author={author}/>
                     : <UnansweredDetails question={question} authedUser={authedUser} author={author}/>
-
             );
         }
-
     }
 }
 
 function mapStateToProps({questions, users}, ownProps) {
-
-    if (Object.keys(questions).length === 0) {
+    if (Object.keys(questions).length === 0 || Object.keys(users).length === 0) {
         return {loading: true};
     }
-    const question = questions[ownProps.match.params.id];
-    const author = users[question.author];
-
+    const question = questions[ownProps.match.params.id] || null;
+    const author = question ? users[question.author] : null;
 
     return {
         loading: false,

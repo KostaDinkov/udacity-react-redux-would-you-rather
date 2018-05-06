@@ -1,15 +1,13 @@
 import React from 'react';
 import * as auth from '../util/auth'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
 import { withRouter} from 'react-router';
 
 class Nav extends React.Component {
   render() {
     const authedUser = this.props.users[auth.getUserId()];
-    if (authedUser) {
-      console.log('Authed : ', authedUser);
-    }
+
 
     return (
       <div id='cssmenu'>
@@ -19,7 +17,7 @@ class Nav extends React.Component {
            <li><NavLink  to='/leaderBoard' activeClassName = 'active'>Leader Board</NavLink></li>
           {/* Todo add logout link*/}
           {authedUser && (<span id='authedUser'>Hello, {authedUser.name}</span>)}
-          {authedUser && (<li><a href='#'>Logout</a></li>)}
+          {authedUser && (<li><Link to='/logout'>Logout</Link></li>)}
         </ul>
       </div>
     );

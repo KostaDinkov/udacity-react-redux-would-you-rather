@@ -157,6 +157,12 @@ export function _saveQuestion(question) {
                 [formattedQuestion.id]: formattedQuestion
             };
 
+            //FIX: Need to also update the users db
+            users = {
+                ...users,
+            [question.author]:{...users[question.author], questions:users[question.author].questions.concat(formattedQuestion.id)}
+            };
+
             res(formattedQuestion);
         }, 1000);
     });
@@ -186,8 +192,8 @@ export function _saveQuestionAnswer({authedUser, qid, answer}) {
                     }
                 }
             };
-
-            res();
+            //FIX: return updated db portions
+            res({users, questions});
         }, 500);
     });
 }

@@ -1,15 +1,43 @@
 import React, {Component, Fragment} from 'react';
+import {saveAnswer} from '../data/api';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { showLoading, hideLoading} from 'react-redux-loading-bar'
+import { receiveQuestions } from '../actions/questions';
+import {receiveUsers} from '../actions/users';
+
 
 class UnansweredDetails extends Component {
 
     state = {
         selectedOption: 'optionOne'
     };
+    updateUsers = (data)=>{
+
+    };
 
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.selectedOption);
+
+        const data = {
+            authedUser:this.props.authedUser.id,
+            qid:this.props.question.id,
+            answer:this.state.selectedOption
+        };
+
+        this.props.dispatch(showLoading());
+        saveAnswer(data)
+            .then((res)=>{
+
+                this.props.dispatch(receiveQuestions(res.questions));
+                this.props.dispatch(receiveUsers(res.users));
+                this.props.history.push(`/questions/${this.props.question.id}`);
+
+            })
+
+            .finally(()=> this.props.dispatch(hideLoading()));
+
     };
 
     handleOptionChange = (e) => {
@@ -19,7 +47,7 @@ class UnansweredDetails extends Component {
     render() {
         const question = this.props.question;
         const author = this.props.author;
-        const authedUser = this.props.authedUser;
+
         return (
             <Fragment>
                 <div >
@@ -43,4 +71,4 @@ class UnansweredDetails extends Component {
     }
 }
 
-export default (UnansweredDetails);
+export default withRouter(connect()(UnansweredDetails));
