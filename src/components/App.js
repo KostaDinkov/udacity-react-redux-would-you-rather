@@ -12,13 +12,14 @@ import NoMatch from './NoMatch'
 import Leaderboard from './Leaderboard';
 import Logout from './Logout';
 import SignIn from './SignIn';
+import PrivateRoute from './PrivateRoute'
+
 
 
 class App extends Component {
 
     componentWillMount() {
         this.props.dispatch(handleInitialData());
-
     }
 
     render() {
@@ -26,33 +27,19 @@ class App extends Component {
             <Fragment>
                 <Nav/>
                 <LoadingBar/>
-
-
                 <Switch>
-                    <Route exact path='/' render={() => {
-                        return this.props.loading
-                            ? null
-                            : <QuestionsDashboard/>;
-                    }
-                    }/>
-                    <Route exact path='/newQuestion' component={NewQuestion}/>
+                    <PrivateRoute exact path='/' component={QuestionsDashboard}/>
+                    <PrivateRoute exact path='/newQuestion' component={NewQuestion}/>
                     <Route exact path ='/signIn' component={SignIn}/>
-                    <Route exact path='/leaderBoard' component={Leaderboard}/>
-                    <Route exact path='/questions/:id' component={QuestionDetails}/>
+                    <PrivateRoute exact path='/leaderBoard' component={Leaderboard}/>
+                    <PrivateRoute exact path='/questions/:id' component={QuestionDetails}/>
                     <Route exact path='/logout' component={Logout}/>
                     <Route component={NoMatch}/>
                 </Switch>
                 <ToastContainer autoClose={3000}/>
-
-
             </Fragment>
         );
     }
 }
 
-function mapStateToProps({questions}) {
-    return {loading: !Object.keys(questions).length > 0};
-
-}
-
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect()(App));
