@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import Progress from 'react-bootstrap/lib/ProgressBar';
+import {Progress} from 'semantic-ui-react';
 
 class AnsweredDetails extends Component {
     isSelected(n) {
@@ -16,10 +16,9 @@ class AnsweredDetails extends Component {
     render() {
         const question = this.props.question;
         const author = this.props.author;
-
         const optionOneVotes = question.optionOne.votes.length;
         const optionTwoVotes = question.optionTwo.votes.length;
-
+        const total = optionOneVotes + optionTwoVotes;
         return (
             <Fragment>
                 <div>
@@ -31,29 +30,34 @@ class AnsweredDetails extends Component {
                     />
                     <p>Author :{author.name}</p>
                     <h2>Would You Rather:</h2>
-                    <div>
-                        <span style={this.isSelected(1)}>✓</span>
-                        <span>{question.optionOne.text}</span>
-                    </div>
-                    <div>
-                        <span style={this.isSelected(2)}>✓</span>
-                        <span>{question.optionTwo.text}</span>
-                    </div>
+
                     <div style={{width: '50%'}}>
-                        <Progress>
-                            <Progress
-                                label={`Option One: ${optionOneVotes} votes`}
-                                bsStyle='info'
-                                now={this.getOptionPercent(optionOneVotes, optionTwoVotes)}
-                                key={1}
-                            />
-                            <Progress
-                                label={`Option Two: ${optionTwoVotes} votes`}
-                                bsStyle='warning'
-                                now={this.getOptionPercent(optionTwoVotes, optionOneVotes)}
-                                key={2}
-                            />
+
+                        <Progress
+                            color='teal'
+                            value={optionOneVotes}
+                            total={total}
+                            progress='ratio'
+                            percent={this.getOptionPercent(optionOneVotes, optionTwoVotes)}
+                        >
+                            <div>
+                                <span style={this.isSelected(1)}>✓</span>
+                                <span>{question.optionOne.text}</span>
+                            </div>
                         </Progress>
+
+                        <Progress
+                            color='teal'
+                            value={optionTwoVotes}
+                            total={total}
+                            percent={this.getOptionPercent(optionTwoVotes, optionOneVotes)}
+                        >
+                            <div>
+                                <span style={this.isSelected(2)}>✓</span>
+                                <span>{question.optionTwo.text}</span>
+                            </div>
+                        </Progress>
+
                     </div>
 
 

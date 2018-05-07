@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {setUserId} from '../util/auth';
 import {Redirect} from 'react-router-dom';
 import {toast} from 'react-toastify';
+import {Button, Grid, Header, Image, Message, Segment, Dropdown} from 'semantic-ui-react';
 
 class SignIn extends React.Component {
     state = {
@@ -18,35 +19,66 @@ class SignIn extends React.Component {
             });
             return;
         }
-        setUserId(user.id);
+        setUserId(user);
         this.setState({redirectToReferrer: true});
     };
-    handleUserSelect = (e) => {
-        const user = this.props.users[(e.target.value)];
+    handleUserSelect = (e, data) => {
+        const user = data.value;
         this.setState({selectedUser: user});
     };
 
+    usersToOptions() {
+        const users = this.props.users;
+        return Object.keys(users).map(k => ({
+            text: users[k].name,
+            value: users[k].id,
+            image: users[k].avatarURL
+        }));
+    }
+
     render() {
         const {from} = this.props.location.state || {from: {pathname: '/'}};
-        const users = this.props.users;
+        const message = (from.pathname === '/')
+            ? `Pease sign in to continue`
+            : `You must be signed in to view this page: ${from.pathname}`;
+        const users = this.usersToOptions();
         if (this.state.redirectToReferrer) {
             return (
                 <Redirect to={from}/>
             );
         }
         return (
-            <div>
-                <span>You must sign in to view this page: ({from.pathname})</span>
-                <h2>Sign in</h2>
-                <select id='userSelector' defaultValue='none' onChange={this.handleUserSelect}>
-                    <option value='none' disabled='true'>Select user</option>
-                    {Object.keys(users).map(key => (
-                        <option key={users[key].id} value={users[key].id}>{users[key].name}</option>
-                    ))}
-                </select>
-                <button onClick={this.handleSignIn}>Sign In</button>
+            <Grid
 
-            </div>
+
+                textAlign='center'
+                style={{height: '70%'}}
+                verticalAlign='middle'
+            >
+
+                <Grid.Column style={{maxWidth: 450}}>
+                    <Message
+                        style={{textAlign: 'center'}}
+                        header='Welcome to the Would You Rather App!'
+                        attached
+                        content={message}/>
+                    <Segment className='attached' textAlign='center'>
+
+                        <Image centered size='small' src='/media/logo.jpg'/>
+                        <Header as='h2' color='teal' textAlign='center'>Sign in</Header>
+                        <Dropdown
+                            placeholder={'Select User'}
+                            onChange={this.handleUserSelect}
+                            fluid selection
+                            options={users}
+                        />
+
+
+                        <Button style={{marginTop: 10}} fluid color='teal' onClick={this.handleSignIn}>Sign In</Button>
+                    </Segment>
+                </Grid.Column>
+
+            </Grid>
         );
     }
 }

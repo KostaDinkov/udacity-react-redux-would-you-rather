@@ -23,7 +23,7 @@ class Nav extends React.Component {
                                 <Link to='/logout'>Logout</Link>
                             </li>
                         </Fragment>
-                        : <span>You are not logged in!</span>
+                        : null
                     }
 
                 </ul>
