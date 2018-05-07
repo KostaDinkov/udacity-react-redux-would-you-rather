@@ -27,11 +27,9 @@ class NewQuestion extends Component {
             this.props.dispatch(handleCreateQuestion(question,auth.getUserId()))
                 .then(() => {
                     this.props.history.push('/');
-                    toast.success('Question saved!', {
-                        position: toast.POSITION.BOTTOM_CENTER
-                    });
+                    toast.success('Question saved!');
                 })
-                .catch(() => toast.error('There was an error.Please try again.',{position : toast.POSITION.BOTTOM_CENTER}));
+                .catch(() => toast.error('There was an error.Please try again.'));
         }
     };
 
@@ -39,7 +37,7 @@ class NewQuestion extends Component {
         let isValid = true;
         if (question.optionOneText.length === 0 || question.optionTwoText.length === 0) {
             isValid = false;
-            toast.warn('Please provide both options!',{position : toast.POSITION.BOTTOM_CENTER});
+            toast.warn('Please provide both options!');
         }
         return isValid;
     }
