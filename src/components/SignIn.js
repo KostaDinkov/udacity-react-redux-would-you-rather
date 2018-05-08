@@ -49,11 +49,9 @@ class SignIn extends React.Component {
         }
         return (
             <Grid
-
-
                 textAlign='center'
-                style={{height: '70%'}}
-                verticalAlign='middle'
+                style={{height: '70%', marginTop:'2%'}}
+
             >
 
                 <Grid.Column style={{maxWidth: 450}}>
