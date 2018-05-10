@@ -1,16 +1,12 @@
 import React, {Component, Fragment} from 'react';
-import {Progress} from 'semantic-ui-react';
+import {MAX_COMPONENT_WIDTH} from '../util/config';
+import {Grid, Segment, Image, Header,Message} from 'semantic-ui-react';
+import {getUserId} from '../util/auth';
+import ResultMessage from './ResultMessage';
 
 class AnsweredDetails extends Component {
     isSelected(n) {
-        if ((this.props.question.optionOne.votes.includes(this.props.author.id) ? 1 : 2) === n) {
-            return {};
-        }
-        return {display: 'none'};
-    }
-
-    getOptionPercent(votesOne, votesTwo) {
-        return 100 * (votesOne / (votesOne + votesTwo));
+        return (this.props.question.optionOne.votes.includes(getUserId()) ? 1 : 2) === n;
     }
 
     render() {
@@ -21,47 +17,39 @@ class AnsweredDetails extends Component {
         const total = optionOneVotes + optionTwoVotes;
         return (
             <Fragment>
-                <div>
-                    <img src={author.avatarURL}
-                         alt="avatar"
-                         width='100'
-                         height='100'
-                         style={{float: 'left'}}
-                    />
-                    <p>Author :{author.name}</p>
-                    <h2>Would You Rather:</h2>
+                <Grid centered padded>
+                    <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
+                        <Message attached='top'>
+                            <Header as='h4'>Asked by {author.name}</Header>
+                        </Message>
+                        <Segment attached='bottom'>
+                            <Grid centered>
+                                <Grid.Row divided>
+                                    <Grid.Column verticalAlign='middle' width={6}>
+                                        <Image src={author.avatarURL} alt="avatar"/>
 
-                    <div style={{width: '50%'}}>
+                                    </Grid.Column>
 
-                        <Progress
-                            color='teal'
-                            value={optionOneVotes}
-                            total={total}
-                            progress='ratio'
-                            percent={this.getOptionPercent(optionOneVotes, optionTwoVotes)}
-                        >
-                            <div>
-                                <span style={this.isSelected(1)}>✓</span>
-                                <span>{question.optionOne.text}</span>
-                            </div>
-                        </Progress>
-
-                        <Progress
-                            color='teal'
-                            value={optionTwoVotes}
-                            total={total}
-                            percent={this.getOptionPercent(optionTwoVotes, optionOneVotes)}
-                        >
-                            <div>
-                                <span style={this.isSelected(2)}>✓</span>
-                                <span>{question.optionTwo.text}</span>
-                            </div>
-                        </Progress>
-
-                    </div>
-
-
-                </div>
+                                    <Grid.Column width={10}>
+                                        <Header as='h2'>Results:</Header>
+                                        <ResultMessage
+                                            voteCount={optionOneVotes}
+                                            totalVotes={total}
+                                            selected={this.isSelected(1)}
+                                            questionText={question.optionOne.text}
+                                        />
+                                        <ResultMessage
+                                            voteCount={optionTwoVotes}
+                                            totalVotes={total}
+                                            selected={this.isSelected(2)}
+                                            questionText={question.optionTwo.text}
+                                        />
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        </Segment>
+                    </Grid.Column>
+                </Grid>
             </Fragment>
         );
     }

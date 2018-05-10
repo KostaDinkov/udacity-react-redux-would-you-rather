@@ -55,7 +55,7 @@ class QuestionsDashboard extends Component {
                         centered
                     >
                         <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
-                            <Tab panes={tabPanes} menu={{color: 'teal', widths: 2}}/>
+                            <Tab panes={tabPanes} menu={{color: 'teal', widths: 2, attached:'top'}}/>
                         </Grid.Column>
                     </Grid>
                 </Fragment>

@@ -5,7 +5,7 @@ import {withRouter} from 'react-router';
 import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {receiveQuestions} from '../actions/questions';
 import {receiveUsers} from '../actions/users';
-import {Grid, Segment, Image, Form, Radio, Button} from 'semantic-ui-react';
+import {Grid, Segment, Image, Form, Radio, Button, Message,Header} from 'semantic-ui-react';
 import {MAX_COMPONENT_WIDTH} from '../util/config';
 
 class UnansweredDetails extends Component {
@@ -39,20 +39,25 @@ class UnansweredDetails extends Component {
             <Fragment>
                 <Grid centered padded>
                     <Grid.Column style={{maxWidth:MAX_COMPONENT_WIDTH}}>
-
-                        <Segment>
-                            <Grid centered>
-                                <Grid.Row divided>
+                        <Message attached='top'>
+                            <Header as='h4' >{author.name} asks:</Header>
+                        </Message>
+                        <Segment attached='bottom'>
+                            <Grid >
+                                <Grid.Row divided >
                                     <Grid.Column verticalAlign='middle' width={6}>
+
                                         <Image src={author.avatarURL} alt="avatar"/>
+
+
                                     </Grid.Column>
 
-                                    <Grid.Column width={10}>
-                                        <p>Author: {author.name}</p>
-                                        <h2>Would You Rather:</h2>
+                                    <Grid.Column  verticalAlign='bottom' width={10}>
+
+                                        <h2>Would You Rather ...</h2>
 
                                         <Form onSubmit={this.handleSubmit}>
-                                            <Segment>
+
                                                 <Form.Field
                                                     control={Radio}
                                                     value='optionOne'
@@ -66,9 +71,9 @@ class UnansweredDetails extends Component {
                                                     value='optionTwo'
                                                     checked={this.state.selectedOption === 'optionTwo'}
                                                     onChange={this.handleOptionChange}
-                                                    label={question.optionOne.text}
+                                                    label={question.optionTwo.text}
                                                 />
-                                            </Segment>
+
                                             <Button fluid color='teal' type="submit">Submit</Button>
                                         </Form>
                                     </Grid.Column>
