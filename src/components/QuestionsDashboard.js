@@ -1,8 +1,9 @@
-import React, {Fragment, Component} from 'react';
-import QuestionList, {listFilters} from './QuestionList';
-import _isEmpty from 'lodash/isEmpty';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Tab, Grid} from 'semantic-ui-react';
+import _isEmpty from 'lodash/isEmpty';
+import {Grid, Tab} from 'semantic-ui-react';
+import QuestionList, {listFilters} from './QuestionList';
+import {getUserId} from '../util/auth';
 
 class QuestionsDashboard extends Component {
     static toggleList(evt, listName) {
@@ -21,26 +22,39 @@ class QuestionsDashboard extends Component {
     }
 
     render() {
-        const tabPanes = [
-            {
-                menuItem: 'Unanswered Questions',
-                render: () => <Tab.Pane> <QuestionList filter={listFilters.UNANSWERED}/></Tab.Pane>
-            },
-            {
-                menuItem: 'Answered Questions',
-                render: () => <Tab.Pane> <QuestionList filter={listFilters.ANSWERED}/></Tab.Pane>
-            }
-        ];
         if (!this.props.loading) {
+            const authedUserId = getUserId();
+            const questions = this.props.questions;
+            const unansweredQuestions = Object.keys(questions)
+                .filter((k) => (
+                    !questions[k].optionOne.votes.includes(authedUserId)
+                    &&
+                    !questions[k].optionTwo.votes.includes(authedUserId)))
+                .map(k => questions[k]);
+            const answeredQuestions = Object.keys(questions)
+                .filter((k) => (
+                    questions[k].optionOne.votes.includes(authedUserId)
+                    ||
+                    questions[k].optionTwo.votes.includes(authedUserId)))
+                .map(k => questions[k]);
+            const tabPanes = [
+                {
+                    menuItem: 'Unanswered Questions',
+                    render: () => <Tab.Pane> <QuestionList questions={unansweredQuestions}/></Tab.Pane>
+                },
+                {
+                    menuItem: 'Answered Questions',
+                    render: () => <Tab.Pane> <QuestionList questions={answeredQuestions}/></Tab.Pane>
+                }
+            ];
             return (
                 <Fragment>
                     <Grid
                         centered
-                        style={{height:'70%', marginTop:'2%'}}
-
+                        style={{height: '70%', marginTop: '2%'}}
                     >
-                        <Grid.Column style={{maxWidth:450}}>
-                            <Tab panes={tabPanes} menu={{ color:'teal',widths:2}}/>
+                        <Grid.Column style={{maxWidth: 450}}>
+                            <Tab panes={tabPanes} menu={{color: 'teal', widths: 2}}/>
                         </Grid.Column>
                     </Grid>
                 </Fragment>
@@ -52,11 +66,11 @@ class QuestionsDashboard extends Component {
     }
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps({users, questions}) {
     if (_isEmpty(users)) {
         return {loading: true};
     }
-    else return {loading: false};
+    else return {loading: false, questions};
 }
 
 export default connect(mapStateToProps)(QuestionsDashboard);
