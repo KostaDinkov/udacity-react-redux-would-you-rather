@@ -4,6 +4,7 @@ import {setUserId} from '../util/auth';
 import {Redirect} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {Button, Grid, Header, Image, Message, Segment, Dropdown} from 'semantic-ui-react';
+import {MAX_COMPONENT_WIDTH} from '../util/config';
 
 class SignIn extends React.Component {
     state = {
@@ -50,11 +51,11 @@ class SignIn extends React.Component {
         return (
             <Grid
                 textAlign='center'
-                style={{height: '70%', marginTop:'2%'}}
+                padded
 
             >
 
-                <Grid.Column style={{maxWidth: 450}}>
+                <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
                     <Message
                         style={{textAlign: 'center'}}
                         header='Welcome to the Would You Rather App!'

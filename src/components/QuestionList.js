@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import QuestionListItem from './QuestionListItem';
-import {Item} from 'semantic-ui-react'
+import {Item,Segment} from 'semantic-ui-react'
 
 
 class QuestionList extends React.Component {
@@ -8,13 +8,11 @@ class QuestionList extends React.Component {
         const questions = this.props.questions;
         return (
             <Fragment>
-                <Item.Group>
                     {questions.map(q => (
-                        <Item  key={q.id}>
+                        <Segment  key={q.id} >
                             <QuestionListItem question={q}/>
-                        </Item>
+                        </Segment>
                     ))}
-                </Item.Group>
             </Fragment>
         );
     }

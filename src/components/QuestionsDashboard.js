@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import {Grid, Tab} from 'semantic-ui-react';
+import {MAX_COMPONENT_WIDTH} from '../util/config';
 import QuestionList, {listFilters} from './QuestionList';
 import {getUserId} from '../util/auth';
 
@@ -50,10 +51,10 @@ class QuestionsDashboard extends Component {
             return (
                 <Fragment>
                     <Grid
+                        padded
                         centered
-                        style={{height: '70%', marginTop: '2%'}}
                     >
-                        <Grid.Column style={{maxWidth: 450}}>
+                        <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
                             <Tab panes={tabPanes} menu={{color: 'teal', widths: 2}}/>
                         </Grid.Column>
                     </Grid>
