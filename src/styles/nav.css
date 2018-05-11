@@ -28,7 +28,7 @@
 
 #cssmenu {
     width: auto;
-    border-bottom: 3px solid #47c9af;
+    /*border-bottom: 3px solid #47c9af;*/
     font-family: Raleway, sans-serif;
     line-height: 1;
 }
@@ -77,7 +77,8 @@
 
 #cssmenu > ul > li.active > a,
 #cssmenu > ul > li:hover > a,
-#cssmenu > ul > li > a:hover {
+#cssmenu > ul > li > a:hover,
+#cssmenu > ul > li > a.active{
     color: #ffffff;
 }
 
@@ -107,7 +108,7 @@
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after,
 #cssmenu > ul > li > a.active:after {
-    background: #47c9af;
+    background: #00b5ad;
 }
 
 /* custom */
@@ -129,7 +130,17 @@
     float: right;
 
 }
+#cssmenu  img{
+    z-index: 2;
+    margin-top: 10px;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
 
+    float: right;
+}
 #root {
     height: 100%
 }

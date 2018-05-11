@@ -46,29 +46,27 @@ class NewQuestion extends Component {
             <Fragment>
                 <Grid centered padded>
                     <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
-                        <Header textAlign={'center'} as={'h1'} attached={'top'}>Create New Question</Header>
+                        <Header textAlign='center' as='h1' attached='top'>Create New Question</Header>
                         <Segment attached={'bottom'}>
                             <p>Complete the question:</p>
                             <h3>Would you rather ...</h3>
-                            <Form onSubmit={this.handleSubmit}>
+                            <Form  onSubmit={this.handleSubmit}>
                                 <Form.Field>
                                     <Input onChange={this.handleChange}
-                                           type="text"
                                            placeholder='Enter Option One Text Here'
                                            value={this.state.option1}
-                                           id={'option1'}
+                                           id='option1'
                                     />
                                 </Form.Field>
                                 <Divider horizontal>OR</Divider>
-                                <Form.Field required>
+                                <Form.Field >
                                     <Input onChange={this.handleChange}
-                                           type="text"
                                            placeholder='Enter Option Two Text Here'
                                            value={this.state.option2}
-                                           id={'option2'}
+                                           id='option2'
                                     />
                                 </Form.Field>
-                                <Button fluid color='teal' type='submit'>Submit</Button>
+                                <Button fluid color='teal' type='submit' >Submit</Button>
                             </Form>
                         </Segment>
                     </Grid.Column>
