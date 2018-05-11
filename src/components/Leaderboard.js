@@ -1,6 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
+import {Message, Grid,Header,Segment,Image,Icon,Label,Table} from 'semantic-ui-react';
+import {MAX_COMPONENT_WIDTH} from '../util/config';
+
 
 class Leaderboard extends Component {
     getLeaderboard() {
@@ -12,6 +15,13 @@ class Leaderboard extends Component {
             })
             .sort((a, b) => b.score - a.score);
     }
+    getAwardColor(index){
+        switch (index){
+            case 1: return 'yellow';
+            case 2: return 'teal';
+            case 3: return 'grey'
+        }
+    }
 
     render() {
         if (this.props.loading) {
@@ -19,24 +29,51 @@ class Leaderboard extends Component {
         }
         return (
             <Fragment>
-                <h2>Leaderboard</h2>
-                <ul>
+                <Grid centered padded>
+                    <Grid.Column style={{maxWidth:MAX_COMPONENT_WIDTH}}>
                     {this.getLeaderboard().map((user, index) => (
-                        <li key={user.id}>
-                            <span>{index + 1}</span>
-                            <img
-                                src={user.avatarURL}
-                                alt="avatar"
-                                width='100'
-                                height='100'
-                            />
-                            <p>{user.name}</p>
-                            <p>Score: {user.score}</p>
-                            <div>Answered questions: {Object.keys(user.answers).length}</div>
-                            <div>Created questions: {user.questions.length}</div>
-                        </li>
+                            <Fragment key={user.id} >
+                                <Segment >
+                                    {index<4
+                                    ?<Label corner='left' ><Icon name='winner' color={this.getAwardColor(index+1)}/></Label>
+                                    :null}
+
+                                    <Grid >
+                                        <Grid.Row divided >
+
+                                            <Grid.Column verticalAlign='middle' width={4}>
+                                                <Image src={user.avatarURL} alt="avatar"/>
+                                            </Grid.Column>
+
+                                            <Grid.Column   width={8}>
+                                                <Header as='h2'>{user.name}</Header>
+                                                <Table basic={'very'}>
+                                                    <Table.Row>
+                                                        <Table.Cell> Answered questions</Table.Cell>
+                                                        <Table.Cell>{Object.keys(user.answers).length}</Table.Cell>
+                                                    </Table.Row>
+                                                    <Table.Row>
+                                                        <Table.Cell> Created questions</Table.Cell>
+                                                        <Table.Cell>{user.questions.length}</Table.Cell>
+                                                    </Table.Row>
+                                                </Table>
+
+
+                                            </Grid.Column>
+
+                                            <Grid.Column textAlign='center' verticalAlign='middle' width={4} >
+                                                <Message attached='top'>Score</Message>
+                                                <Segment attached='bottom'>
+                                                <Label color='teal' circular size='huge'>{user.score}</Label>
+                                                </Segment>
+                                            </Grid.Column>
+                                        </Grid.Row>
+                                    </Grid>
+                                </Segment>
+                            </Fragment>
                     ))}
-                </ul>
+                    </Grid.Column>
+                </Grid>
             </Fragment>
         );
     }
