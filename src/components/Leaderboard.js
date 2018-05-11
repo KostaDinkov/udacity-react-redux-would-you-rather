@@ -37,10 +37,8 @@ class Leaderboard extends Component {
                                     {index<4
                                     ?<Label corner='left' ><Icon name='winner' color={this.getAwardColor(index+1)}/></Label>
                                     :null}
-
                                     <Grid >
                                         <Grid.Row divided >
-
                                             <Grid.Column verticalAlign='middle' width={4}>
                                                 <Image src={user.avatarURL} alt="avatar"/>
                                             </Grid.Column>
@@ -48,6 +46,7 @@ class Leaderboard extends Component {
                                             <Grid.Column   width={8}>
                                                 <Header as='h2'>{user.name}</Header>
                                                 <Table basic={'very'}>
+                                                    <Table.Body>
                                                     <Table.Row>
                                                         <Table.Cell> Answered questions</Table.Cell>
                                                         <Table.Cell>{Object.keys(user.answers).length}</Table.Cell>
@@ -56,9 +55,8 @@ class Leaderboard extends Component {
                                                         <Table.Cell> Created questions</Table.Cell>
                                                         <Table.Cell>{user.questions.length}</Table.Cell>
                                                     </Table.Row>
+                                                    </Table.Body>
                                                 </Table>
-
-
                                             </Grid.Column>
 
                                             <Grid.Column textAlign='center' verticalAlign='middle' width={4} >
