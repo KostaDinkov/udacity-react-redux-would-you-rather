@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import UnansweredDetails from './UnansweredDetails';
 import AnsweredQuestion from './AnsweredDetails';
-import * as auth from '../util/auth';
+import * as auth from '../../util/auth';
 import { Redirect} from 'react-router';
 
 

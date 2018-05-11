@@ -15,8 +15,8 @@ class Nav extends React.Component {
                     <div id='cssmenu'>
                         <ul>
                             <li><NavLink exact to='/' activeClassName='active'>Home</NavLink></li>
-                            <li><NavLink to='/newQuestion' activeClassName='active'>New Question</NavLink></li>
-                            <li><NavLink to='/leaderBoard' activeClassName='active'>Leader Board</NavLink></li>
+                            <li><NavLink to='/add' activeClassName='active'>New Question</NavLink></li>
+                            <li><NavLink to='/leaderboard' activeClassName='active'>Leader Board</NavLink></li>
 
                             {authedUser
                                 ? <Fragment>

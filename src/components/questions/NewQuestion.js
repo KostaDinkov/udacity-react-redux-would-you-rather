@@ -1,11 +1,11 @@
 import React, {Fragment, Component} from 'react';
-import * as auth from '../util/auth';
+import * as auth from '../../util/auth';
 import {withRouter} from 'react-router';
-import {handleCreateQuestion} from '../actions/questions';
+import {handleCreateQuestion} from '../../actions/questions';
 import {toast} from 'react-toastify';
 import {connect} from 'react-redux';
 import {Grid, Segment, Header, Form, Input, Button, Divider} from 'semantic-ui-react';
-import {MAX_COMPONENT_WIDTH} from '../util/config';
+import {MAX_COMPONENT_WIDTH} from '../../util/config';
 
 class NewQuestion extends Component {
     state = {

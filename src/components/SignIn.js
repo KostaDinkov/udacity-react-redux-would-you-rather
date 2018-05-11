@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {Button, Grid, Header, Image, Message, Segment, Dropdown} from 'semantic-ui-react';
 import {MAX_COMPONENT_WIDTH} from '../util/config';
+import {handleInitialData} from '../actions/shared';
 
 class SignIn extends React.Component {
     state = {

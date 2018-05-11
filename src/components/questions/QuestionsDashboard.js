@@ -2,9 +2,9 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import {Grid, Tab} from 'semantic-ui-react';
-import {MAX_COMPONENT_WIDTH} from '../util/config';
+import {MAX_COMPONENT_WIDTH} from '../../util/config';
 import QuestionList, {listFilters} from './QuestionList';
-import {getUserId} from '../util/auth';
+import {getUserId} from '../../util/auth';
 
 class QuestionsDashboard extends Component {
     static toggleList(evt, listName) {

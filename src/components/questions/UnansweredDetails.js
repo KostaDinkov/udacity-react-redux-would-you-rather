@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react';
-import {saveAnswer} from '../data/api';
+import {saveAnswer} from '../../data/api';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {showLoading, hideLoading} from 'react-redux-loading-bar';
-import {receiveQuestions} from '../actions/questions';
-import {receiveUsers} from '../actions/users';
+import {receiveQuestions} from '../../actions/questions';
+import {receiveUsers} from '../../actions/users';
 import {Grid, Segment, Image, Form, Radio, Button, Message,Header} from 'semantic-ui-react';
-import {MAX_COMPONENT_WIDTH} from '../util/config';
+import {MAX_COMPONENT_WIDTH} from '../../util/config';
 
 class UnansweredDetails extends Component {
     state = {
@@ -46,18 +46,12 @@ class UnansweredDetails extends Component {
                             <Grid >
                                 <Grid.Row divided >
                                     <Grid.Column verticalAlign='middle' width={6}>
-
                                         <Image src={author.avatarURL} alt="avatar"/>
-
-
                                     </Grid.Column>
 
                                     <Grid.Column  verticalAlign='bottom' width={10}>
-
                                         <h2>Would You Rather ...</h2>
-
                                         <Form onSubmit={this.handleSubmit}>
-
                                                 <Form.Field
                                                     control={Radio}
                                                     value='optionOne'
@@ -65,7 +59,6 @@ class UnansweredDetails extends Component {
                                                     onChange={this.handleOptionChange}
                                                     label={question.optionOne.text}
                                                 />
-
                                                 <Form.Field
                                                     control={Radio}
                                                     value='optionTwo'
@@ -73,7 +66,6 @@ class UnansweredDetails extends Component {
                                                     onChange={this.handleOptionChange}
                                                     label={question.optionTwo.text}
                                                 />
-
                                             <Button fluid color='teal' type="submit">Submit</Button>
                                         </Form>
                                     </Grid.Column>

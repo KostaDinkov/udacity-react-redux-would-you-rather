@@ -17,6 +17,7 @@ const ResultMessage = (props)=>{
                 value={voteCount}
                 total={totalVotes}
                 progress='percent'
+                precision={1}
             >
                 {`${voteCount} out of ${totalVotes} votes`}
             </Progress>

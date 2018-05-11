@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 import Nav from './Nav';
 import {Route, Switch, withRouter} from 'react-router';
 import LoadingBar from 'react-redux-loading-bar';
-import QuestionsDashboard from './QuestionsDashboard';
-import NewQuestion from './NewQuestion';
+import QuestionsDashboard from './questions/QuestionsDashboard';
+import NewQuestion from './questions/NewQuestion';
 import {ToastContainer} from 'react-toastify';
-import QuestionDetails from './QuestionDetails';
+import QuestionDetails from './questions/QuestionDetails';
 import NoMatch from './NoMatch'
 import Leaderboard from './Leaderboard';
 import Logout from './Logout';
@@ -29,9 +29,9 @@ class App extends Component {
                 <LoadingBar/>
                 <Switch>
                     <PrivateRoute exact path='/' component={QuestionsDashboard}/>
-                    <PrivateRoute exact path='/newQuestion' component={NewQuestion}/>
+                    <PrivateRoute exact path='/add' component={NewQuestion}/>
                     <Route exact path ='/signIn' component={SignIn}/>
-                    <PrivateRoute exact path='/leaderBoard' component={Leaderboard}/>
+                    <PrivateRoute exact path='/leaderboard' component={Leaderboard}/>
                     <PrivateRoute exact path='/questions/:id' component={QuestionDetails}/>
                     <Route exact path='/logout' component={Logout}/>
                     <Route component={NoMatch}/>

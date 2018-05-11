@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import {MAX_COMPONENT_WIDTH} from '../util/config';
+import {MAX_COMPONENT_WIDTH} from '../../util/config';
 import {Grid, Segment, Image, Header,Message} from 'semantic-ui-react';
-import {getUserId} from '../util/auth';
+import {getUserId} from '../../util/auth';
 import ResultMessage from './ResultMessage';
 
 class AnsweredDetails extends Component {
