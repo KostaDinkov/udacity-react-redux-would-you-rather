@@ -12,7 +12,7 @@ import App from './components/App';
 
 import './styles/nav.css';
 
-const store = createStore(reducer, middleware);
+const store = createStore(reducer,middleware);
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
