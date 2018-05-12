@@ -1,11 +1,13 @@
+//core dependencies
 import React from 'react';
 import {connect} from 'react-redux';
-import {setUserId} from '../util/auth';
 import {Redirect} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {Button, Grid, Header, Image, Message, Segment, Dropdown} from 'semantic-ui-react';
-import {MAX_COMPONENT_WIDTH} from '../util/config';
-import {handleInitialData} from '../actions/shared';
+//project modules
+import {setUserId} from '../util/auth';
+import config from '../util/config';
+
 
 class SignIn extends React.Component {
     state = {
@@ -53,31 +55,25 @@ class SignIn extends React.Component {
             <Grid
                 textAlign='center'
                 padded
-
             >
-
-                <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
+                <Grid.Column style={{maxWidth: config.MAX_COMPONENT_WIDTH}}>
                     <Message
                         style={{textAlign: 'center'}}
                         header='Welcome to the Would You Rather App!'
                         attached
                         content={message}/>
                     <Segment className='attached' textAlign='center'>
-
                         <Image centered size='small' src='/media/logo.jpg'/>
-                        <Header as='h2' color='teal' textAlign='center'>Sign in</Header>
+                        <Header as='h2' color={config.primaryColor} textAlign='center'>Sign in</Header>
                         <Dropdown
                             placeholder={'Select User'}
                             onChange={this.handleUserSelect}
                             fluid selection
                             options={users}
                         />
-
-
-                        <Button style={{marginTop: 10}} fluid color='teal' onClick={this.handleSignIn}>Sign In</Button>
+                        <Button style={{marginTop: 10}} fluid color={config.primaryColor} onClick={this.handleSignIn}>Sign In</Button>
                     </Segment>
                 </Grid.Column>
-
             </Grid>
         );
     }

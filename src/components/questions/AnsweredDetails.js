@@ -1,6 +1,8 @@
+//core dependencies
 import React, {Component, Fragment} from 'react';
-import {MAX_COMPONENT_WIDTH} from '../../util/config';
 import {Grid, Segment, Image, Header,Message} from 'semantic-ui-react';
+//project modules
+import config from '../../util/config';
 import {getUserId} from '../../util/auth';
 import ResultMessage from './ResultMessage';
 
@@ -18,7 +20,7 @@ class AnsweredDetails extends Component {
         return (
             <Fragment>
                 <Grid centered padded>
-                    <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
+                    <Grid.Column style={{maxWidth: config.MAX_COMPONENT_WIDTH}}>
                         <Message attached='top'>
                             <Header as='h4'>Asked by {author.name}</Header>
                         </Message>

@@ -1,14 +1,13 @@
+//core dependencies
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
+//project modules
 import UnansweredDetails from './UnansweredDetails';
 import AnsweredQuestion from './AnsweredDetails';
 import * as auth from '../../util/auth';
-import { Redirect} from 'react-router';
-
 
 class QuestionDetails extends Component {
-
-
     isQuestionAnswered() {
         const question = this.props.question;
         const authedUserId = auth.getUserId();
@@ -23,7 +22,6 @@ class QuestionDetails extends Component {
 
     render() {
         if (this.props.loading) {
-            //TODO use dummy skeleton
             return (
                 <div>Loading...</div>
             );
@@ -31,7 +29,7 @@ class QuestionDetails extends Component {
         else if (this.props.question === null) {
             return (
                 <Redirect to='/404'/>
-            )
+            );
         }
         else {
             const question = this.props.question;
@@ -52,7 +50,6 @@ function mapStateToProps({questions, users}, ownProps) {
     }
     const question = questions[ownProps.match.params.id] || null;
     const author = question ? users[question.author] : null;
-
     return {
         loading: false,
         question,

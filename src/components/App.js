@@ -1,23 +1,22 @@
+//core dependencies
 import React, {Component, Fragment} from 'react';
-import {handleInitialData} from '../actions/shared';
 import {connect} from 'react-redux';
-import Nav from './Nav';
 import {Route, Switch, withRouter} from 'react-router';
 import LoadingBar from 'react-redux-loading-bar';
+import {ToastContainer} from 'react-toastify';
+//project modules
+import {handleInitialData} from '../actions/shared';
+import Nav from './Nav';
 import QuestionsDashboard from './questions/QuestionsDashboard';
 import NewQuestion from './questions/NewQuestion';
-import {ToastContainer} from 'react-toastify';
 import QuestionDetails from './questions/QuestionDetails';
-import NoMatch from './NoMatch'
+import NoMatch from './NoMatch';
 import Leaderboard from './Leaderboard';
 import Logout from './Logout';
 import SignIn from './SignIn';
-import PrivateRoute from './PrivateRoute'
-
-
+import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
-
     componentWillMount() {
         this.props.dispatch(handleInitialData());
     }
@@ -30,7 +29,7 @@ class App extends Component {
                 <Switch>
                     <PrivateRoute exact path='/' component={QuestionsDashboard}/>
                     <PrivateRoute exact path='/add' component={NewQuestion}/>
-                    <Route exact path ='/signIn' component={SignIn}/>
+                    <Route exact path='/signIn' component={SignIn}/>
                     <PrivateRoute exact path='/leaderboard' component={Leaderboard}/>
                     <PrivateRoute exact path='/questions/:id' component={QuestionDetails}/>
                     <Route exact path='/logout' component={Logout}/>

@@ -1,17 +1,19 @@
+//core dependencies
 import React, {Fragment} from 'react';
-import * as auth from '../util/auth';
-import {connect} from 'react-redux';
-import {NavLink, Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
 import {Grid, Image} from 'semantic-ui-react';
-import {MAX_COMPONENT_WIDTH} from '../util/config';
+import {NavLink, Link} from 'react-router-dom';
+//project modules
+import * as auth from '../util/auth';
+import config from '../util/config';
 
 class Nav extends React.Component {
     render() {
         const authedUser = this.props.users[auth.getUserId()];
         return (
             <Grid centered padded style={{borderBottom: '3px solid #00b5ad'}}>
-                <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH * 1.5, paddingBottom: 0}}>
+                <Grid.Column style={{maxWidth: config.MAX_COMPONENT_WIDTH * 1.5, paddingBottom: 0}}>
                     <div id='cssmenu'>
                         <ul>
                             <li><NavLink exact to='/' activeClassName='active'>Home</NavLink></li>

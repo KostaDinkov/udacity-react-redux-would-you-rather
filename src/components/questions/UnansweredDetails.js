@@ -1,12 +1,14 @@
+//core depencencies
 import React, {Component, Fragment} from 'react';
-import {saveAnswer} from '../../data/api';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {showLoading, hideLoading} from 'react-redux-loading-bar';
+import {Grid, Segment, Image, Form, Radio, Button, Message,Header} from 'semantic-ui-react';
+//project modules
+import {saveAnswer} from '../../data/api';
 import {receiveQuestions} from '../../actions/questions';
 import {receiveUsers} from '../../actions/users';
-import {Grid, Segment, Image, Form, Radio, Button, Message,Header} from 'semantic-ui-react';
-import {MAX_COMPONENT_WIDTH} from '../../util/config';
+import config from '../../util/config';
 
 class UnansweredDetails extends Component {
     state = {
@@ -38,7 +40,7 @@ class UnansweredDetails extends Component {
         return (
             <Fragment>
                 <Grid centered padded>
-                    <Grid.Column style={{maxWidth:MAX_COMPONENT_WIDTH}}>
+                    <Grid.Column style={{maxWidth:config.MAX_COMPONENT_WIDTH}}>
                         <Message attached='top'>
                             <Header as='h4' >{author.name} asks:</Header>
                         </Message>
@@ -48,7 +50,6 @@ class UnansweredDetails extends Component {
                                     <Grid.Column verticalAlign='middle' width={6}>
                                         <Image src={author.avatarURL} alt="avatar"/>
                                     </Grid.Column>
-
                                     <Grid.Column  verticalAlign='bottom' width={10}>
                                         <h2>Would You Rather ...</h2>
                                         <Form onSubmit={this.handleSubmit}>
@@ -66,13 +67,12 @@ class UnansweredDetails extends Component {
                                                     onChange={this.handleOptionChange}
                                                     label={question.optionTwo.text}
                                                 />
-                                            <Button fluid color='teal' type="submit">Submit</Button>
+                                            <Button fluid color={config.primaryColor} type="submit">Submit</Button>
                                         </Form>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
                         </Segment>
-
                     </Grid.Column>
                 </Grid>
             </Fragment>

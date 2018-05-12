@@ -1,7 +1,10 @@
+//core dependencies
 import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {Grid, Button, Image, Header, Segment, Message} from 'semantic-ui-react';
+//project modules
+import config from '../../util/config'
 
 const TEXT_PREVIEW_LEN = 15;
 
@@ -33,7 +36,7 @@ class QuestionListItem extends React.Component {
                                     size='mini'
                                     basic
                                     fluid
-                                    color='teal'
+                                    color={config.primaryColor}
                                     onClick={this.handleDetails}>
                                     View Poll
                                 </Button>

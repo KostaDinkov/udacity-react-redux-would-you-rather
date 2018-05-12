@@ -1,11 +1,13 @@
+//core dependencies
 import React, {Fragment, Component} from 'react';
-import * as auth from '../../util/auth';
-import {withRouter} from 'react-router';
-import {handleCreateQuestion} from '../../actions/questions';
-import {toast} from 'react-toastify';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
+import {toast} from 'react-toastify';
 import {Grid, Segment, Header, Form, Input, Button, Divider} from 'semantic-ui-react';
-import {MAX_COMPONENT_WIDTH} from '../../util/config';
+//project modules
+import {handleCreateQuestion} from '../../actions/questions';
+import * as auth from '../../util/auth';
+import config from '../../util/config';
 
 class NewQuestion extends Component {
     state = {
@@ -45,7 +47,7 @@ class NewQuestion extends Component {
         return (
             <Fragment>
                 <Grid centered padded>
-                    <Grid.Column style={{maxWidth: MAX_COMPONENT_WIDTH}}>
+                    <Grid.Column style={{maxWidth: config.MAX_COMPONENT_WIDTH}}>
                         <Header textAlign='center' as='h1' attached='top'>Create New Question</Header>
                         <Segment attached={'bottom'}>
                             <p>Complete the question:</p>
@@ -66,7 +68,7 @@ class NewQuestion extends Component {
                                            id='option2'
                                     />
                                 </Form.Field>
-                                <Button fluid color='teal' type='submit' >Submit</Button>
+                                <Button fluid color={config.primaryColor} type='submit' >Submit</Button>
                             </Form>
                         </Segment>
                     </Grid.Column>
